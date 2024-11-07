@@ -1,0 +1,174 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">Zomato</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['foods']"
+            routerLinkActive="router-link-active"
+            >Foods</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        @if (loggednUserData) {
+        <strong>{{ loggednUserData.userName }}</strong>
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          (click)="onLogout()"
+        >
+          LogOut
+        </button>
+
+        } @if (!loggednUserData) {<button
+          class="btn btn-outline-success"
+          type="button"
+          (click)="onLogin()"
+        >
+          Login
+        </button>
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          (click)="onRegister()"
+        >
+          Register</button
+        >}
+      </form>
+    </div>
+  </div>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- login model -->
+<div class="modal" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="onCloseLogin()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <label for="">User Name</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="loginObj.userName"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="loginObj.password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="onLoginForm()"
+          data-bs-dismiss="modal"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Regsiter Modal -->
+<div class="modal" id="registerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Register</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="onCloseRegister()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <label for="">EmailId</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="registerObj.emailId"
+            />
+          </div>
+          <div class="col-6">
+            <label for="">Mobile No</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="registerObj.mobileNo"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="">User Name</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="registerObj.userName"
+            />
+          </div>
+          <div class="col-6">
+            <label for="">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="registerObj.Password"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="onSave()"
+        >
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

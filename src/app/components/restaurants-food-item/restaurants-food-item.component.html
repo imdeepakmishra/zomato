@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+      @for (item of foodItems; track item.itemID) {
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img class="img-height" [src]="item.photoUrl" />
+              </div>
+              <div class="col-9 text-end">
+                {{ item.menuItemName }}
+
+                <br />
+                <small>{{ item.description | slice : 0 - 20 }}</small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{ item.price }}
+              </div>
+
+              <div class="col-8 text-end">
+                <button
+                  class="btn btn-success btn-sm"
+                  (click)="addToCart(item.itemID)"
+                >
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="row">
+      <div class="col-12 pt-2">
+        <h1>Cart Items</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        @for (item of cartItems; track $index) {
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4">
+                <img class="img-cart-height" [src]="item.photoUrl" />
+              </div>
+              <div class="col-8 text-end">
+                {{ item.menuItemName }}
+                <br />
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{ item.price }} * {{ item.quantity }}
+              </div>
+            </div>
+          </div>
+        </div>
+        } @if(!cartItems.length){
+        <div class="col-12">
+          <span>Cart is empty....</span>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h3>Total Amount: {{ totalAmount }}</h3>
+      </div>
+    </div>
+    @if(totalAmount > 1){
+    <div class="row">
+      <div class="col-12 text-end">
+        <button class="btn btn-primary" (click)="onOrder()">
+          <i class="fas fa-shopping-basket"></i>
+          Place Order
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    @if (foodItems.length == 0) {
+    <h1>No foods items currently to deliver....</h1>
+    }
+  </div>
+</div>
